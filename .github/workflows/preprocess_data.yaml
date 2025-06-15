@@ -27,6 +27,21 @@ jobs:
       run: |
         python preprocessing/automate_rtaufik27.py
 
+    - name: List files in preprocessing directory (DEBUG)
+      run: |
+        ls -la preprocessing/
+
+    # untuk kebutuhan tugas, sebaiknya dataset hasil preprocessing tidak perlu dipush ke direktori git, cukup di upload ke artifact saja
+    - name: Commit and Push Preprocessed Dataset
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add preprocessing/employee_preprocessing.csv
+        git commit -m "Update preprocessed employee data [skip ci]" || echo "No changes to commit"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Upload Preprocessed Dataset
       uses: actions/upload-artifact@v4
       with:
