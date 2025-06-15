@@ -74,4 +74,3 @@ if __name__ == "__main__":
     # simpan data hasil preprocessing
     output_path = os.path.join(current_script_directory, 'employee_preprocessing.csv')
     df.to_csv(output_path, index=False)
-    print("===DONE===")
