@@ -8,11 +8,6 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.feature_selection import RFECV
 from imblearn.over_sampling import SMOTE
 import os
-import logging
-# Configure logging to write to a file and set the logging level
-logging.basicConfig(filename='app.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-# Create a logger
-logger = logging.getLogger(__name__)
 
 def run_preprocessing(df_pre):
     # Data Missing Handling
@@ -79,5 +74,4 @@ if __name__ == "__main__":
     # simpan data hasil preprocessing
     output_path = os.path.join(current_script_directory, 'employee_preprocessing.csv')
     df.to_csv(output_path, index=False)
-    # print("===DONE===")
-    logger.info('===THE PROCESSING IS DONE===')
+    print("===DONE===")
