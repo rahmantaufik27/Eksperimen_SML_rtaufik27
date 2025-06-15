@@ -7,16 +7,12 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import StratifiedKFold
 from sklearn.feature_selection import RFECV
 from imblearn.over_sampling import SMOTE
-
+import os
 import logging
 # Configure logging to write to a file and set the logging level
 logging.basicConfig(filename='app.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 # Create a logger
 logger = logging.getLogger(__name__)
-
-
-dataset = "namadataset_raw/employee_dataset_raw.csv"
-df = pd.read_csv(dataset)
 
 def run_preprocessing(df_pre):
     # Data Missing Handling
@@ -71,6 +67,17 @@ def run_preprocessing(df_pre):
 
     return df_pre_final
 
-run_preprocessing(df)
-# print("===DONE===")
-logger.info('===THE PROCESSING IS DONE===')
+# Eksekusi Program
+if __name__ == "__main__":
+    # akses dataset
+    # dataset = "namadataset_raw/employee_dataset_raw.csv"
+    current_script_directory = os.path.dirname(os.path.abspath(__file__))
+    dataset = os.path.join(current_script_directory, '..', 'namadataset_raw', 'employee_dataset_raw.csv')
+    df_raw = pd.read_csv(dataset)
+    # running preprocessing
+    df = run_preprocessing(df_raw)
+    # simpan data hasil preprocessing
+    output_path = os.path.join(current_script_directory, 'employee_preprocessing.csv')
+    df.to_csv(output_path, index=False)
+    # print("===DONE===")
+    logger.info('===THE PROCESSING IS DONE===')
