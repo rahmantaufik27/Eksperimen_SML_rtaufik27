@@ -15,7 +15,7 @@ logging.basicConfig(filename='app.log', level=logging.DEBUG, format='%(asctime)s
 logger = logging.getLogger(__name__)
 
 
-dataset = "../employee_dataset_raw.csv"
+dataset = "namadataset_raw/employee_dataset_raw.csv"
 df = pd.read_csv(dataset)
 
 def run_preprocessing(df_pre):
